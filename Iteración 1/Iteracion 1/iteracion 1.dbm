@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.1" last-position="324,0" last-zoom="0.9"
+	 default-schema="public" default-owner="postgres">
+<database name="new_database" is-template="false" allow-conns="true">
+</database>
+
+<schema name="public" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="empleados">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="720" y="260"/>
+	<column name="IdEmpleados" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="DNI">
+		<type name="character varying" length="9"/>
+	</column>
+	<column name="nombre">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="fecha-nacimiento">
+		<type name="date" length="0"/>
+	</column>
+	<column name="telefono">
+		<type name="numeric" length="9"/>
+	</column>
+	<column name="profesion">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="salario">
+		<type name="numeric" length="6"/>
+	</column>
+	<constraint name="empleados_pk" type="pk-constr" table="public.empleados">
+		<columns names="IdEmpleados" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="monitores">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="100" y="640"/>
+	<column name="IdMonitores" not-null="true">
+		<type name="numeric" length="9"/>
+	</column>
+	<column name="turno">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="actividad">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="puntuacionMedia">
+		<type name="numeric" length="2"/>
+	</column>
+	<constraint name="monitores_pk" type="pk-constr" table="public.monitores">
+		<columns names="IdMonitores" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="registro_monitores">
+	<schema name="public"/>
+	<position x="100" y="440"/>
+
+	<customidxs object-type="column">
+		<object name="IdEmpleados_empleados" index="0"/>
+		<object name="IdMonitores_monitores" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="empleados_fk" index="1"/>
+		<object name="monitores_fk" index="2"/>
+		<object name="registro_monitores_pk" index="0"/>
+	</customidxs>
+</table>
+
+<relationship name="empleados a registro_monitores" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ff0000"
+	 src-table="public.empleados"
+	 dst-table="public.registro_monitores"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+>
+	<label ref-type="src-label">
+		<position x="-56.0381" y="30.6139"/>
+	</label>
+	<label ref-type="dst-label">
+		<position x="11.3163" y="-20.275"/>
+	</label>
+	<label ref-type="name-label">
+		<position x="17.6911" y="2.89844"/>
+	</label>
+</relationship>
+
+<relationship name="monitores a registro" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ff0000"
+	 src-table="public.monitores"
+	 dst-table="public.registro_monitores"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+>
+	<label ref-type="src-label">
+		<position x="-7.14917" y="-44.275"/>
+	</label>
+	<label ref-type="dst-label">
+		<position x="-5.26583" y="-6.275"/>
+	</label>
+	<label ref-type="name-label">
+		<position x="-62.272" y="-69.7607"/>
+	</label>
+</relationship>
+
+<table name="limpiadores">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1620" y="40"/>
+	<column name="IdLimpiadores" not-null="true">
+		<type name="uuid" length="9"/>
+	</column>
+	<column name="turnos" not-null="true">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="zona_asignada" not-null="true">
+		<type name="character varying" length="10"/>
+	</column>
+	<constraint name="limpiadores_pk" type="pk-constr" table="public.limpiadores">
+		<columns names="IdLimpiadores" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="resgistro_limpiadores">
+	<schema name="public"/>
+	<position x="1000" y="40"/>
+
+	<customidxs object-type="column">
+		<object name="IdEmpleados_empleados" index="1"/>
+		<object name="IdLimpiadores_limpiadores" index="0"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="empleados_fk" index="1"/>
+		<object name="limpiadores_fk" index="2"/>
+		<object name="resgistro_limpiadores_pk" index="0"/>
+	</customidxs>
+</table>
+
+<relationship name="empleados a registro_limpiadores" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ff0000"
+	 src-table="public.empleados"
+	 dst-table="public.resgistro_limpiadores"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+>
+	<label ref-type="src-label">
+		<position x="-17.1492" y="-41.6083"/>
+	</label>
+	<label ref-type="dst-label">
+		<position x="10.8496" y="37.725"/>
+	</label>
+	<label ref-type="name-label">
+		<position x="-94.2835" y="-21.094"/>
+	</label>
+</relationship>
+
+<relationship name="limpiadores a registro" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ff0000"
+	 src-table="public.limpiadores"
+	 dst-table="public.resgistro_limpiadores"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+>
+	<label ref-type="src-label">
+		<position x="-9.0325" y="16.225"/>
+	</label>
+	<label ref-type="dst-label">
+		<position x="10.8496" y="-3.83056"/>
+	</label>
+	<label ref-type="name-label">
+		<position x="26.1053" y="-41.2051"/>
+	</label>
+</relationship>
+
+<table name="recepcionista">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="100" y="40"/>
+	<column name="IdRecepcionista" not-null="true">
+		<type name="numeric" length="9"/>
+	</column>
+	<constraint name="recepcionista_pk" type="pk-constr" table="public.recepcionista">
+		<columns names="IdRecepcionista" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="registro_recepcionista">
+	<schema name="public"/>
+	<position x="100" y="240"/>
+
+	<customidxs object-type="column">
+		<object name="IdEmpleados_empleados" index="1"/>
+		<object name="IdRecepcionista_recepcionista" index="0"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="empleados_fk" index="1"/>
+		<object name="recepcionista_fk" index="2"/>
+		<object name="registro_recepcionista_pk" index="0"/>
+	</customidxs>
+</table>
+
+<relationship name="empleados a registro_recepcionista" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ff0000"
+	 src-table="public.empleados"
+	 dst-table="public.registro_recepcionista"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+>
+	<label ref-type="src-label">
+		<position x="-74.9269" y="-3.83056"/>
+	</label>
+	<label ref-type="dst-label">
+		<position x="2.31625" y="-0.775"/>
+	</label>
+	<label ref-type="name-label">
+		<position x="-15.5051" y="-58.4273"/>
+	</label>
+</relationship>
+
+<relationship name="recepcionista a registro" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ff0000"
+	 src-table="public.recepcionista"
+	 dst-table="public.registro_recepcionista"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+>
+	<label ref-type="dst-label">
+		<position x="-9.0325" y="-23.775"/>
+	</label>
+	<label ref-type="name-label">
+		<position x="68.6169" y="-21.8718"/>
+	</label>
+</relationship>
+
+<table name="entrenadores">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1680" y="460"/>
+	<column name="IdEntrenadores" not-null="true">
+		<type name="uuid" length="9"/>
+	</column>
+	<column name="HorasLibres">
+		<type name="numeric" length="2"/>
+	</column>
+	<column name="HorasReservadas">
+		<type name="numeric" length="2"/>
+	</column>
+	<constraint name="entrenadores_pk" type="pk-constr" table="public.entrenadores">
+		<columns names="IdEntrenadores" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="registro_entrenadores">
+	<schema name="public"/>
+	<position x="1340" y="260"/>
+
+	<customidxs object-type="column">
+		<object name="IdEmpleados_empleados" index="0"/>
+		<object name="IdEntrenadores_entrenadores" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="empleados_fk" index="2"/>
+		<object name="entrenadores_fk" index="1"/>
+		<object name="registro_entrenadores_pk" index="0"/>
+	</customidxs>
+</table>
+
+<relationship name="entrenadores a registro" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ff0000"
+	 src-table="public.entrenadores"
+	 dst-table="public.registro_entrenadores"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+>
+	<label ref-type="src-label">
+		<position x="-0.4825" y="-32.275"/>
+	</label>
+	<label ref-type="dst-label">
+		<position x="10.7594" y="5.725"/>
+	</label>
+	<label ref-type="name-label">
+		<position x="76.8831" y="-15.7607"/>
+	</label>
+</relationship>
+
+<relationship name="empleados a registro_entrenadores" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ff0000"
+	 src-table="public.empleados"
+	 dst-table="public.registro_entrenadores"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+>
+	<label ref-type="src-label">
+		<position x="0.416252" y="16.225"/>
+	</label>
+	<label ref-type="dst-label">
+		<position x="-9.0325" y="16.225"/>
+	</label>
+	<label ref-type="name-label">
+		<position x="71.2411" y="-67.1016"/>
+	</label>
+</relationship>
+
+<table name="socios">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1160" y="660"/>
+	<column name="IdSocio" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="Nsocio" not-null="true">
+		<type name="numeric" length="9"/>
+	</column>
+	<column name="nombre" not-null="true">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="telefono" not-null="true">
+		<type name="numeric" length="9"/>
+	</column>
+	<column name="Tcuota" not-null="true">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="NcuentaBancaria" not-null="true">
+		<type name="numeric" length="9"/>
+	</column>
+	<constraint name="socios_pk" type="pk-constr" table="public.socios">
+		<columns names="IdSocio" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="actividades">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="600" y="920"/>
+	<column name="Identificador" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="NombreActividad">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="horario">
+		<type name="time" length="0"/>
+	</column>
+	<column name="aforo">
+		<type name="numeric" length="50"/>
+	</column>
+	<column name="SalaImparticion">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="Fecha">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="actividades_pk" type="pk-constr" table="public.actividades">
+		<columns names="Identificador" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="Factura">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1740" y="880"/>
+	<column name="IdFactura" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="Tcuota">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="Precio">
+		<type name="float" length="0"/>
+	</column>
+	<constraint name="Factura_pk" type="pk-constr" table="public.&quot;Factura&quot;">
+		<columns names="IdFactura" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="registro_actividades">
+	<schema name="public"/>
+	<position x="100" y="900"/>
+
+	<customidxs object-type="column">
+		<object name="IdMonitores_monitores" index="0"/>
+		<object name="Identificador_actividades" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="actividades_fk" index="2"/>
+		<object name="monitores_fk" index="1"/>
+		<object name="registro_actividades_pk" index="0"/>
+	</customidxs>
+</table>
+
+<relationship name="monitores a registro_actividades" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ff0000"
+	 src-table="public.monitores"
+	 dst-table="public.registro_actividades"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+>
+	<label ref-type="src-label">
+		<position x="-9.0325" y="36.225"/>
+	</label>
+	<label ref-type="dst-label">
+		<position x="-9.0325" y="-13.775"/>
+	</label>
+	<label ref-type="name-label">
+		<position x="79.9742" y="2.89844"/>
+	</label>
+</relationship>
+
+<relationship name="actividades a registro_actividades" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ff0000"
+	 src-table="public.actividades"
+	 dst-table="public.registro_actividades"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+>
+	<label ref-type="src-label">
+		<position x="-9.0325" y="-23.775"/>
+	</label>
+	<label ref-type="dst-label">
+		<position x="6.31625" y="-20.775"/>
+	</label>
+	<label ref-type="name-label">
+		<position x="1.11154" y="14.2393"/>
+	</label>
+</relationship>
+
+<table name="registro_Valoracion">
+	<schema name="public"/>
+	<position x="620" y="640"/>
+
+	<customidxs object-type="column">
+		<object name="IdMonitores_monitores" index="0"/>
+		<object name="IdSocio_socios" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="monitores_fk" index="2"/>
+		<object name="registro_Valoracion_pk" index="0"/>
+		<object name="socios_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="socios a valoracion" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#00aa00"
+	 src-table="public.socios"
+	 dst-table="public.&quot;registro_Valoracion&quot;"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+>
+	<label ref-type="src-label">
+		<position x="-29.0325" y="-3.775"/>
+	</label>
+	<label ref-type="dst-label">
+		<position x="15.3162" y="19.225"/>
+	</label>
+	<label ref-type="name-label">
+		<position x="-8.88846" y="-15.7607"/>
+	</label>
+</relationship>
+
+<relationship name="monitores a valoracion" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#00aa00"
+	 src-table="public.monitores"
+	 dst-table="public.&quot;registro_Valoracion&quot;"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+>
+	<label ref-type="dst-label">
+		<position x="-5.26583" y="-9.60833"/>
+	</label>
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+<table name="registro_emision">
+	<schema name="public"/>
+	<position x="1740" y="660"/>
+
+	<customidxs object-type="column">
+		<object name="IdFactura_Factura" index="1"/>
+		<object name="IdSocio_socios" index="0"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="Factura_fk" index="2"/>
+		<object name="registro_emision_pk" index="0"/>
+		<object name="socios_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="socios a emision" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ff860c"
+	 src-table="public.socios"
+	 dst-table="public.registro_emision"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+>
+	<label ref-type="src-label">
+		<position x="0" y="0"/>
+	</label>
+	<label ref-type="dst-label">
+		<position x="-9.0325" y="-23.775"/>
+	</label>
+	<label ref-type="name-label">
+		<position x="16.0911" y="12.8984"/>
+	</label>
+</relationship>
+
+<relationship name="factura a emision" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ff860c"
+	 src-table="public.&quot;Factura&quot;"
+	 dst-table="public.registro_emision"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+>
+	<label ref-type="dst-label">
+		<position x="-9.0325" y="59.225"/>
+	</label>
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+<table name="registro_asignacion">
+	<schema name="public"/>
+	<position x="1160" y="460"/>
+
+	<customidxs object-type="column">
+		<object name="IdEntrenadores_entrenadores" index="0"/>
+		<object name="IdSocio_socios" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="entrenadores_fk" index="1"/>
+		<object name="registro_asignacion_pk" index="0"/>
+		<object name="socios_fk" index="2"/>
+	</customidxs>
+</table>
+
+<relationship name="entrenadores a asignacion" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ff0000"
+	 src-table="public.entrenadores"
+	 dst-table="public.registro_asignacion"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+>
+	<label ref-type="src-label">
+		<position x="-28.4825" y="5.05833"/>
+	</label>
+	<label ref-type="name-label">
+		<position x="-25.6169" y="-47.2607"/>
+	</label>
+</relationship>
+
+<relationship name="socios a asignacion" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#00aa00"
+	 src-table="public.socios"
+	 dst-table="public.registro_asignacion"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+>
+	<label ref-type="src-label">
+		<position x="10.9675" y="-43.775"/>
+	</label>
+	<label ref-type="name-label">
+		<position x="-31.1053" y="-15.7607"/>
+	</label>
+</relationship>
+
+<table name="registro_realizan">
+	<schema name="public"/>
+	<position x="1180" y="900"/>
+
+	<customidxs object-type="column">
+		<object name="IdSocio_socios" index="0"/>
+		<object name="Identificador_actividades" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="actividades_fk" index="2"/>
+		<object name="registro_realizan_pk" index="0"/>
+		<object name="socios_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="socios a realizan" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#00aa00"
+	 src-table="public.socios"
+	 dst-table="public.registro_realizan"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+>
+	<label ref-type="src-label">
+		<position x="-9.0325" y="36.225"/>
+	</label>
+	<label ref-type="dst-label">
+		<position x="-9.0325" y="-23.775"/>
+	</label>
+	<label ref-type="name-label">
+		<position x="-28.1053" y="-7.26066"/>
+	</label>
+</relationship>
+
+<relationship name="actividades a realizan" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#00aa00"
+	 src-table="public.actividades"
+	 dst-table="public.registro_realizan"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+>
+	<label ref-type="dst-label">
+		<position x="-29.0325" y="19.225"/>
+	</label>
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+</dbmodel>
