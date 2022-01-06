@@ -10,5 +10,5 @@ Este repositorio constara de 5 participantes que pertenecen al grupo 3:
 Contendrá:
 
 - modificaciones de los anteriores artefactos
-- Codigo Fuente de la pagina web (Solo la paginal principal)
+- Codigo Fuente de la pagina web 
 - presentacion power point
